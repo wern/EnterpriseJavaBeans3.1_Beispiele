@@ -1,0 +1,10 @@
+<project name="kaffee" default="jar" basedir="../..">
+
+	<property name="package.dir" value="stateless/kaffeepause"/>
+	<property name="ejb.jar" value="kaffee.jar"/>
+	<property name="main.class" value="stateless.kaffeepause.Client"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>
+

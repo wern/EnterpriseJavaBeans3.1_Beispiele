@@ -1,0 +1,9 @@
+<project name="blaettern" default="jar" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/blaettern"/>
+	<property name="ejb.jar" value="blaettern.jar"/>
+	<property name="main.class" value="kochrezepte.blaettern.ArtikelClient"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

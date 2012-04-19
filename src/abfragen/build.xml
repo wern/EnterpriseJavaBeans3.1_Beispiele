@@ -1,0 +1,9 @@
+<project name="abfragen" default="jar" basedir="..">
+
+	<property name="package.dir" value="abfragen"/>
+	<property name="ejb.jar" value="abfragen.jar"/>
+	<property name="main.class" value="abfragen.AutoClient"/>
+
+	<import file="../../common.build.xml" />
+
+</project>

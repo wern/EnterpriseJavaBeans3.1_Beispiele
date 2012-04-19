@@ -1,0 +1,24 @@
+<project name="jsf-cdi" default="jar" basedir="../../..">
+
+	<property name="package.dir" value="kochrezepte/jsf/cdi"/>
+	<property name="ejb.jar" value="jsf-cdi.war"/>
+
+	<import file="../../../../common.build.xml" />
+
+    <target name="jar" depends="compile" description="Baut das JSF-War">
+      <war destfile="${full.ejb.jar}" webxml="${package.dir}/WEB-INF/web.xml">
+         <fileset dir="${package.dir}">
+            <include name="*.xhtml"/>
+         	<include name="*.html"/>
+         </fileset>
+         <classes dir="${classes.dir}">
+            <include name="${package.dir}/**/*.class"/>
+         </classes>
+         <webinf dir="${package.dir}/WEB-INF">
+            <include name="*.xml"/>
+         </webinf>
+      </war>
+   </target>
+
+</project>
+

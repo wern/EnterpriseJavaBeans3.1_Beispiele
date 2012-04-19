@@ -1,0 +1,25 @@
+<project name="jms" default="run.sender" basedir="..">
+
+	<property name="package.dir" value="jms"/>
+	<property name="ejb.jar" value="jms.jar"/>
+	<property name="main.args" value=""/>
+	<property name="queue.test" value=""/>
+
+	<import file="../../common.build.xml" />
+	
+	<target name="run.sender">
+		<property name="main.class" value="jms.Sender"/>
+		<antcall target="run"/>
+	</target>
+
+	<target name="run.empfaenger.synchron">
+		<property name="main.class" value="jms.EmpfaengerSynchron"/>
+		<antcall target="run"/>
+	</target>
+	
+	<target name="run.empfaenger.asynchron">
+		<property name="main.class" value="jms.EmpfaengerAsynchron"/>
+		<antcall target="run"/>
+	</target>
+	
+</project>

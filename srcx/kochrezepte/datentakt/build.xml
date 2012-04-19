@@ -1,0 +1,10 @@
+<project name="datentakt" default="jar" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/datentakt"/>
+	<property name="ejb.jar" value="datentakt.jar"/>
+	<property name="main.class" value="kochrezepte.datentakt.Client"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>
+

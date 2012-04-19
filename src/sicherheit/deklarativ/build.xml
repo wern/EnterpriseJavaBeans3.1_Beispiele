@@ -1,0 +1,26 @@
+<project name="torwaechter" default="jar" basedir="../../">
+	
+	<property name="package.dir" value="sicherheit/deklarativ"/>
+	<property name="ejb.jar" value="torwaechter.jar"/>
+	<property name="main.class" value="sicherheit.deklarativ.Client"/>
+	<property name="main.args" value=""/>
+	
+	<import file="../../../common.build.xml"/>
+	
+	<target name="kopiereUserUndRollen">
+		<copy file="${package.dir}/hanser-users.properties"
+			todir="${jboss.conf}/props"/>
+		<copy file="${package.dir}/hanser-roles.properties"
+			todir="${jboss.conf}/props"/>
+	</target>
+	
+	<target name="run" depends="jar" description="Ruft das Client-Programm auf">
+		<java classname="${main.class}" fork="yes" dir="${package.dir}">
+			<!-- wird nur fuer JAAS benoetigt -->
+			<jvmarg value="-Djava.security.auth.login.config=../login.config" />
+			<arg line="${main.args}"/>
+			<classpath refid="classpath"/>
+		</java>
+	</target>
+	
+</project>

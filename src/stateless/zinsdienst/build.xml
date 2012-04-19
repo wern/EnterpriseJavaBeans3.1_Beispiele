@@ -1,0 +1,10 @@
+<project name="zinsdienst" default="jar" basedir="../../">
+
+	<property name="package.dir" value="stateless/zinsdienst"/>
+	<property name="ejb.jar" value="zinsdienst.jar"/>
+	<property name="main.class" value="stateless.zinsdienst.Client"/>
+	<property name="main.args" value=""/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

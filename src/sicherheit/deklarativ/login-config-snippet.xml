@@ -1,0 +1,14 @@
+<!-- Diese application-poliy wird vom Beispiel benoetigt -->
+<!-- Bitte in %JBOSS_HOME%/default/conf.login-config.xml aufnehmen -->
+<!-- Vor dem Start des Servers "ant kopiereUserUndRollen" ausfuehren um die User anzulegen-->
+
+    <application-policy name="hanser">
+      <authentication>
+        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule"
+          flag="required">
+          <module-option name="usersProperties">props/hanser-users.properties</module-option>
+          <module-option name="rolesProperties">props/hanser-roles.properties</module-option>
+          <module-option name="unauthenticatedIdentity">anonymous</module-option>
+        </login-module>
+      </authentication>
+    </application-policy>

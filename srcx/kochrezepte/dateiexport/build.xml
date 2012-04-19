@@ -1,0 +1,9 @@
+<project name="dateiexport" default="jar" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/dateiexport"/>
+	<property name="ejb.jar" value="dateiexport.jar"/>
+	<property name="main.class" value="kochrezepte.dateiexport.KundenClient"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

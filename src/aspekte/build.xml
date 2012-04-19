@@ -1,0 +1,10 @@
+<project name="aspekte" default="jar" basedir="..">
+
+	<property name="package.dir" value="aspekte"/>
+	<property name="ejb.jar" value="aspekte.jar"/>
+	<property name="main.class" value="aspekte.HelloAspektClient"/>
+
+	<import file="../../common.build.xml" />
+
+</project>
+

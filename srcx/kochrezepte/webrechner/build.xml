@@ -1,0 +1,10 @@
+<project name="webrechner" default="jar" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/webrechner"/>
+	<property name="ejb.jar" value="webrechner.jar"/>
+	<property name="main.class" value="kochrezepte.webrechner.RechenClient"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>
+

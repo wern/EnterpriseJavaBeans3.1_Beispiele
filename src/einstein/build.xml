@@ -1,0 +1,17 @@
+<project name="einstein" default="jar" basedir="..">
+
+	<property name="package.dir" value="einstein"/>
+	<property name="ejb.jar" value="einstein.jar"/>
+	<property name="main.class" value="einstein.client.gui.swing.EinStein"/>
+	<property name="metainf.dir" value="${basedir}/${package.dir}/server/intern"/>
+	<property name="queue.test" value=""/>
+
+	<import file="../../common.build.xml" />
+
+	<target name="test" depends="jar,queuetest" description="Startet den Einstein-Test">
+		<java classname="einstein.client.EinsteinTest" fork="yes" dir="${package.dir}">
+	         <classpath refid="classpath"/>
+	    </java>
+	</target>
+	
+</project>

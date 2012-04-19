@@ -1,0 +1,9 @@
+<project name="transaktionen" default="jar" basedir="..">
+
+	<property name="package.dir" value="transaktionen"/>
+	<property name="ejb.jar" value="transaktionen.jar"/>
+	<property name="main.class" value="transaktionen.ShopClient"/>
+
+	<import file="../../common.build.xml" />
+
+</project>

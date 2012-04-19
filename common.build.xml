@@ -1,0 +1,117 @@
+<project name="common-build">
+  <description>
+    Allgemeine Build-Regeln, die in allen Beispielen gemeinsam genutzt werden.
+  </description>
+
+   <property name="jboss.home" value="/Documents/Buch/jboss"/>
+   <property name="jboss.deploy" value="${jboss.home}/server/default/deploy"/>
+   <property name="jboss.conf" value="${jboss.home}/server/default/conf"/>
+   <property name="examples.root" value="${basedir}/.."/>
+   <property name="classes.dir" value="${examples.root}/classes"/>
+   <property name="jar.dir" value="${examples.root}"/>
+   <property name="full.ejb.jar" value="${jar.dir}/${ejb.jar}"/>
+   <property name="main.args" value=""/>
+   <property name="metainf.dir" value="${basedir}/${package.dir}"/>
+
+   <path id="classpath">
+      <pathelement location="${examples.root}"/> <!-- fuer jndi.properties -->
+      <pathelement location="${examples.root}/src"/> <!-- fuer Images -->
+      <pathelement location="${classes.dir}"/>
+      <pathelement location="${jboss.home}/client/jbossall-client.jar"/>
+
+ <!-- Die folgenden Abhaengigkeiten werden zur Laufzeit benoetigt um ggf.
+      spezielle Hibernate Collection Implementierungen deserialisieren zu koennen
+ -->
+   	  <fileset dir="${jboss.home}/common/lib">
+   	         <include name="hibernate*.jar"/>
+   	  </fileset>
+
+<!-- Die folgende Zeile bezieht alle Bibliotheken der JBoss-Installtion
+     in den Classpath ein. Das ist u.U. hilfreich, um in Exception-Faellen
+     genauere Informationen auf Client-Seite zu erhalten.
+
+      <fileset dir="${jboss.home}">
+         <include name="**/*.jar"/>
+      </fileset>
+-->
+   </path>
+
+   <path id="classpath_webservice">
+      <pathelement location="${examples.root}"/>
+      <pathelement location="${classes.dir}"/>
+      <pathelement location="${jboss.home}/server/default/deploy/jbossws.sar/jboss-jaxws.jar"/>
+   </path>
+
+   <path id="classpath_kochrezepte">
+      <fileset dir="${jboss.home}/server/default/deployers/jsf.deployer/Mojarra-2.0/jsf-libs">
+            <include name="jsf-api-2.*.jar"/>
+      </fileset>
+   	  <fileset dir="${jboss.home}/server/default/deployers/resteasy.deployer">
+   	         <include name="jaxrs-api-2.*.jar"/>
+   	  </fileset>
+   </path>
+
+   <target name="prepare">
+      <mkdir dir="${classes.dir}"/>
+      <mkdir dir="${jar.dir}"/>
+   </target>
+
+   <target name="compile" depends="prepare" description="Compiliert die Quellen">
+      <javac srcdir="${basedir}" destdir="${classes.dir}"
+         debug="on"
+         includes="${package.dir}/**">
+         <classpath>
+            <path refid="classpath" />
+            <path refid="classpath_webservice"/>
+            <path refid="classpath_kochrezepte"/>
+         </classpath>
+      </javac>
+   </target>
+
+   <target name="jar" depends="compile" description="Baut das EJB-Jar">
+      <jar jarfile="${full.ejb.jar}">
+         <fileset dir="${classes.dir}">
+            <include name="${package.dir}/**/*.class"/>
+         </fileset>
+         <fileset dir="${metainf.dir}">
+            <include name="META-INF/**"/>
+         </fileset>
+      </jar>
+   </target>
+
+   <target name="deploy" depends="jar"
+           description="Deployed das EJB-Jar durch Copy Deployment im Server">
+      <copy file="${full.ejb.jar}" todir="${jboss.deploy}"/>
+   </target>
+
+   <target name="undeploy"
+           description="Undeployment durch Entfernen des EJB-Jars aus dem Server">
+      <delete file="${jboss.deploy}/${ejb.jar}"/>
+   </target>
+
+   <target name="queuetest" if="queue.test"
+           description="Prueft die Konfiguration der Queue queue/Praxisbuch - Voraussetzung fuer alle JMS-Beispiele">
+      <fail message="Die Queue 'Praxisbuch' ist noch nicht konfiguriert!">
+         <condition>
+            <resourcecount when="equal" count="0">
+               <fileset dir="${jboss.deploy}/hornetq" includes="hornetq-jms.xml">
+                  <contains text="/queue/Praxisbuch"/>
+               </fileset>
+            </resourcecount>
+         </condition>
+      </fail>
+   </target>
+
+   <target name="run" depends="jar,queuetest" description="Ruft das Client-Programm auf">
+      <java classname="${main.class}" fork="yes" dir="${package.dir}">
+      	 <arg line="${main.args}"/>
+         <classpath refid="classpath"/>
+      </java>
+   </target>
+
+   <target name="clean" description="Loescht alle generierte Dateien">
+      <delete file="${full.ejb.jar}"/>
+   	  <delete dir="${classes.dir}/${package.dir}" />
+   </target>
+
+</project>

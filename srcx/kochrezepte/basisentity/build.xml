@@ -1,0 +1,9 @@
+<project name="basisentity" default="jar" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/basisentity"/>
+	<property name="ejb.jar" value="basisentity.jar"/>
+	<property name="main.class" value="kochrezepte.basisentity.BibliotheksClient"/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

@@ -1,0 +1,49 @@
+<project name="openejb-kunde" default="test" basedir="../../..">
+
+	<property name="package.dir" value="kochrezepte/openejb/kunde"/>
+	<property name="ejb.jar" value="openejb-kunde.jar"/>
+    <property name="junit.home" value="/Documents/Buch/junit"/>
+    <property name="openejb.home" value="/Documents/Buch/openejb-3.1.3"/>
+
+	<import file="../../../../common.build.xml" />
+
+    <path id="classpath_testing">
+      <pathelement location="${classes.dir}"/>
+      <pathelement location="${basedir}/${package.dir}"/>
+      <pathelement location="${junit.home}/junit-4.8.2.jar"/>
+      <fileset dir="${openejb.home}/lib">
+         <include name="*.jar"/>
+      </fileset>
+    </path>
+
+    <target name="compile" depends="prepare" description="Compiliert die Quellen">
+      <javac srcdir="${basedir}" destdir="${classes.dir}"
+         debug="on"
+         includes="${package.dir}/**">
+         <classpath>
+            <path refid="classpath_testing"/>
+         </classpath>
+      </javac>
+   </target>
+
+	<target name="clean_classes">
+		<echo message="Sicherstellen, dass wir nicht zu viele Klassen im Klassenpfad haben..." />
+		<delete dir="${classes.dir}"/>
+	</target>
+
+   <target name="test" depends="clean_classes,compile">
+
+    <junit dir="${classes.dir}" printsummary="true" fork="true" >
+    	<sysproperty key="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
+      <classpath>
+            <path refid="classpath_testing"/>
+      </classpath>
+      <formatter type="brief" usefile="false" />
+      <batchtest>
+        <fileset dir="${classes.dir}" includes="**/kunde/*Test.class" />
+      </batchtest>
+    </junit>
+  </target>
+
+</project>
+

@@ -1,0 +1,19 @@
+<project name="bestellannahme" default="jar" basedir="../../">
+
+	<property name="package.dir" value="sicherheit/programmatisch"/>
+	<property name="ejb.jar" value="bestellannahme.jar"/>
+	<property name="main.class" value="sicherheit.programmatisch.Client"/>
+	<property name="main.args" value=""/>
+
+	<import file="../../../common.build.xml" />
+	
+	<target name="run" depends="jar" description="Ruft das Client-Programm auf">
+      <java classname="${main.class}" fork="yes" dir="${package.dir}">
+		<!-- wird nur fuer JAAS benoetigt -->
+		<jvmarg value="-Djava.security.auth.login.config=../login.config" />
+		 <arg line="${main.args}"/>
+         <classpath refid="classpath"/>
+      </java>
+   </target>
+
+</project>

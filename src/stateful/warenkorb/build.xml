@@ -1,0 +1,10 @@
+<project name="warenkorb" default="jar" basedir="../../">
+
+	<property name="package.dir" value="stateful/warenkorb"/>
+	<property name="ejb.jar" value="warenkorb.jar"/>
+	<property name="main.class" value="stateful.warenkorb.Client"/>
+	<property name="main.args" value=""/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

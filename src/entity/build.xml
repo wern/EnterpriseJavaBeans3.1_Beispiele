@@ -1,0 +1,10 @@
+<project name="kunde" default="jar" basedir="..">
+
+	<property name="package.dir" value="entity"/>
+	<property name="ejb.jar" value="kunde.jar"/>
+	<property name="main.class" value="entity.KundenClient"/>
+	<property name="main.args" value="erzeuge Peter Mustermann"/>
+
+	<import file="../../common.build.xml" />
+
+</project>

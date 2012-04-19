@@ -1,0 +1,42 @@
+<project name="tor" default="jar" basedir="../../">
+	
+	<property name="package.dir" value="sicherheit/authentifizierung"/>
+	<property name="ejb.jar" value="torwaechter.jar"/>
+	<property name="main.args" value=""/>
+	
+	<import file="../../../common.build.xml"/>
+	
+	<target name="kopiereUserUndRollen">
+		<copy file="${package.dir}/hanser-users.properties"
+			todir="${jboss.conf}/props"/>
+		<copy file="${package.dir}/hanser-roles.properties"
+			todir="${jboss.conf}/props"/>
+	</target>
+	
+	<target name="run">
+		<property name="main.class" value="sicherheit.authentifizierung.Client"/>
+			<antcall target="runClient"/>
+	</target>
+	
+	<target name="runMitAnmeldung">
+		<property name="main.class" value="sicherheit.authentifizierung.ClientMitAnmeldung"/>
+		<antcall target="runClient"/>
+	</target>
+	
+	<target name="runMitDialog">
+		<property name="main.class" value="sicherheit.authentifizierung.ClientMitDialog"/>
+		<antcall target="runClient"/>
+	</target>	
+	
+	<target name="runClient" depends="jar"
+		description="Ruft das Client-Programm auf">
+		<java classname="${main.class}" fork="yes">
+			<!-- wird nur fuer JAAS benoetigt -->
+			<jvmarg value="-Djava.security.auth.login.config=../login.config" />
+			
+			<arg line="${main.args}"/>
+			<classpath refid="classpath"/>
+		</java>
+	</target>
+	
+</project>

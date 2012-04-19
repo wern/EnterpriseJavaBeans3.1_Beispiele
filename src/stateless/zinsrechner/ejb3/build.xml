@@ -1,0 +1,10 @@
+<project name="zinsrechner" default="jar" basedir="../../../">
+
+	<property name="package.dir" value="stateless/zinsrechner/ejb3"/>
+	<property name="ejb.jar" value="zinsrechner.jar"/>
+	<property name="main.class" value="stateless.zinsrechner.ejb3.Client"/>
+	<property name="main.args" value=""/>
+
+	<import file="../../../../common.build.xml" />
+
+</project>

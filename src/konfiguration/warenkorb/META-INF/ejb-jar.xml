@@ -1,0 +1,17 @@
+<ejb-jar
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                            http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd"
+        version="3.0">
+	<enterprise-beans>
+		<session>
+			<ejb-name>WarenkorbMitMindestwert</ejb-name>
+			<env-entry>
+				<env-entry-name>konfiguration.warenkorb.WarenkorbImpl/mindestwert</env-entry-name>
+				<env-entry-type>java.lang.Long</env-entry-type>
+				<env-entry-value>5</env-entry-value>
+			</env-entry>	
+		</session>
+	</enterprise-beans>
+</ejb-jar>

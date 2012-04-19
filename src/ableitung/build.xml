@@ -1,0 +1,10 @@
+<project name="audio" default="jar" basedir="..">
+
+	<property name="package.dir" value="ableitung"/>
+	<property name="ejb.jar" value="audio.jar"/>
+	<property name="main.class" value="ableitung.AudioClient"/>
+	<property name="main.args" value="langspielplatte TheWall 32 45 12 11"/>
+
+	<import file="../../common.build.xml" />
+
+</project>

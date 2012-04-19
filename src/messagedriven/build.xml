@@ -1,0 +1,11 @@
+<project name="messagedriven" default="jar" basedir="..">
+
+	<property name="package.dir" value="messagedriven"/>
+	<property name="ejb.jar" value="messagedriven.jar"/>
+	<property name="main.args" value=""/>
+	<property name="main.class" value="messagedriven.Client"/>
+	<property name="queue.test" value=""/>
+
+	<import file="../../common.build.xml" />
+	
+</project>

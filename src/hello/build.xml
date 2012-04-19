@@ -1,0 +1,10 @@
+<project name="hello" default="jar" basedir="..">
+
+	<property name="package.dir" value="hello"/>
+	<property name="ejb.jar" value="hello.jar"/>
+	<property name="main.class" value="hello.HelloWorldClient"/>
+
+	<import file="../../common.build.xml" />
+
+</project>
+

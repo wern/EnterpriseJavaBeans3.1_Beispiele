@@ -1,0 +1,10 @@
+<project name="konfiguration_zinsdienst" default="jar" basedir="../../">
+
+	<property name="package.dir" value="konfiguration/zinsdienst"/>
+	<property name="ejb.jar" value="konfiguration_zinsdienst.jar"/>
+	<property name="main.class" value="konfiguration.zinsdienst.Client"/>
+	<property name="main.args" value=""/>
+
+	<import file="../../../common.build.xml" />
+
+</project>

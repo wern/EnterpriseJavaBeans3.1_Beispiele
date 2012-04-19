@@ -1,0 +1,34 @@
+<project name="jsf-classic" default="war" basedir="../..">
+
+	<property name="package.dir" value="kochrezepte/restful"/>
+	<property name="ejb.jar" value="restful.jar"/>
+	<property name="war" value="restful.war"/>
+
+	<import file="../../../common.build.xml" />
+
+    <target name="war" depends="jar" description="Baut das RESTEasy-War">
+      <war destfile="${jar.dir}/${war}" webxml="${package.dir}/WEB-INF/web.xml">
+         <lib dir="${jar.dir}">
+      	 	<include name="restful.jar"/>
+         </lib>
+      </war>
+   </target>
+
+   <target name="deploy" depends="jar"
+           description="Deployed das WAR durch Copy Deployment im Server">
+      <copy file="${jar.dir}/${war}" todir="${jboss.deploy}"/>
+   </target>
+
+   <target name="undeploy"
+           description="Undeployment durch Entfernen des WARs aus dem Server">
+      <delete file="${jboss.deploy}/${war}"/>
+   </target>
+
+   <target name="clean" description="Loescht alle generierte Dateien">
+   	  <delete file="${jar.dir}/${war}"/>
+      <delete file="${full.ejb.jar}"/>
+   	  <delete dir="${classes.dir}/${package.dir}" />
+   </target>
+
+</project>
+

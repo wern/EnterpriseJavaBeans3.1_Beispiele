@@ -1,0 +1,9 @@
+<project name="beziehungen" default="jar" basedir="..">
+
+	<property name="package.dir" value="beziehungen"/>
+	<property name="ejb.jar" value="beziehungen.jar"/>
+	<property name="main.class" value="beziehungen.BezClient"/>
+
+	<import file="../../common.build.xml" />
+
+</project>
